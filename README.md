@@ -1,4 +1,4 @@
-# how_use_github_etc
+# how_use_GitHub_etc
 We easily forget how to use git commands and etc...
 
 ## Git clone to other repository

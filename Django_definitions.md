@@ -26,4 +26,57 @@ In sample.html
 ~~~
 ```
 
+## Template tag(if phrase)
+### How to use
+
+In sample.html
+```html
+~~~
+<body>
+    {% if formula %} <!--  -->
+        <>out put</> <!-- perform this process when formula is True -->
+    {% elif formula2 %}
+        <>out put2</> <!-- perform this process when formula2 is True -->
+    {% else %}
+        <>out put3</> <!-- perform this process when formula and formula2 are False -->
+    {% endif %} <!-- This sentence must be used in HTML -->
+</body>
+~~~
+```
+
+## Template tag(for phrase)
+### How to use
+
+```html
+~~~
+<body>
+    {% for valiable in iterable_object %} <!--  -->
+       <>process</>
+    {% endfor %} <!-- This sentence must be used in HTML -->
+</body>
+~~~
+```
+
+## Template tag(block phrase)
+block frase replaces from child html file etc.
+Mainly use base.html and etc. that are template html.
+
+### How to use
+
+
+```html
+~~~
+<head>
+    <title>{% block title_name}Main title{% endblock %}</title>
+</head>
+<body>
+    {% block content %} <!--  -->
+       <p>Main content</p>
+    {% endblock %} <!-- This sentence must be used in HTML -->
+</body>
+~~~
+```
+
+
+    
 

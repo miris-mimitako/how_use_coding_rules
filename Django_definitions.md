@@ -77,6 +77,45 @@ Mainly use base.html and etc. that are template html.
 ~~~
 ```
 
+## Template tag(include)
+Insert same item on HTML.
+Icons, js, css etc.
 
-    
+### How to use
+
+```html
+<!-- part.html -->
+<script src = "xxx.js"></script>
+
+```
+Defined base item.
+
+
+```html
+~~~
+<head>
+    ~~~
+    {{% include "part.html" %}}
+</head>
+<body>
+    {% block content %} <!--  -->
+       <p>Main content</p>
+    {% endblock %} <!-- This sentence must be used in HTML -->
+</body>
+~~~
+```
+
+
+## Template Tag(extends)
+html frame uses extends tag.
+It is easy to use and build html file.
+
+```html
+{% extends "base.html" %}
+
+
+```
+Extends code imports from "base.html".
+Extends can call multiply times unless same name calling.
+Extends can use inheritance. 
 

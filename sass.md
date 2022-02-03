@@ -68,5 +68,59 @@ p {
 
 ```
 
+### Interpolation 
+replacement from mixin to include.
+mixin valiable and include valiable against one by one.
+
+```SCSS
+@mixin define-content($name, $glyph){
+	span.class-#{$name}{
+		font-size:10px;
+		content:$glyph;
+	}
+}
+
+@include define-content("classname","++");
+
+```
+```css
+span.class-classname{
+	font-size:10px;
+	content:"++";
+}
+```
+
+Link: https://sass-lang.com/documentation/style-rules/declarations
+
+## Property declarations
+
+```SCSS
+.class {
+	$size: 100px;
+	width:$size;
+	height: $size;
+	border-radius:$size * 0.5;
+}
+```
+
+### inaterpolation
+
+```SCSS
+// @each is same as for in python.
+@mixin prefix($property, $value, $prefixes){
+	@each $prefix in $prefixes{
+		-#{$prefix}-#{$property}:$value;
+	}
+	#{$property}:$value;
+}
+
+// array is separated by space.
+.gray{
+	@include prefix(filter, grayscale(50%), moz webkit)
+}
+
+```
+
+
 
 

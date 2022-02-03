@@ -120,6 +120,89 @@ Link: https://sass-lang.com/documentation/style-rules/declarations
 }
 
 ```
+### Property nesting
+
+```SCSS
+.class{
+	font-size:10px;
+	transition:{
+		property:font-size;
+		duration:4s;
+		delay:2s;
+	}
+	// connect suffix uses "&"
+	&:hover{font-size:36px;}
+}
+```
+```css
+.class {
+  font-size: 10px;
+  transition-property: font-size;
+  transition-duration: 4s;
+  transition-delay: 2s;
+}
+.class:hover {
+  font-size: 36px;
+}
+```
+
+Shorthands nesting
+
+```SCSS
+.class{
+	margin:auto{
+		top:10px;
+		bottom:0px;
+	}
+}
+```
+
+```css
+.class{
+	margin:auto;
+	margin-top:10px;
+	margin-bottom:0px;
+}
+
+```
+
+### hidden declaration
+You need unnecessary using property.
+
+```SCSS
+$round-edge: false;
+.class {
+	border: 1px solid blue;
+	border-radius: if ($round-edge, 10px, null); // cannot convert to css
+}
+
+```
+
+### custom property
+
+Valiable shall use #{ valiable }
+
+```SCSS
+$valiable1: #818181;
+$valiable2: blue;
+$valiable3: #000000;
+
+:root{
+	--primary:#{valiable1};
+	--accent:#{valiable2};
+	--warn:#{valiable3};
+
+	--consumed-by-js:$valiable1; // Error. You shall use #{ valiable } phrase.
+}
+
+```
+
+
+
+
+
+### 
+
 
 
 

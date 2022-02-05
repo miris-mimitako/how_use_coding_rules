@@ -70,7 +70,7 @@ p {
 
 ### Interpolation 
 replacement from mixin to include.
-mixin valiable and include valiable against one by one.
+mixin variable and include variable against one by one.
 
 ```SCSS
 @mixin define-content($name, $glyph){
@@ -180,30 +180,216 @@ $round-edge: false;
 
 ### custom property
 
-Valiable shall use #{ valiable }
+variable shall use #{ variable }
 
 ```SCSS
-$valiable1: #818181;
-$valiable2: blue;
-$valiable3: #000000;
+$variable1: #818181;
+$variable2: blue;
+$variable3: #000000;
 
 :root{
-	--primary:#{valiable1};
-	--accent:#{valiable2};
-	--warn:#{valiable3};
+	--primary:#{variable1};
+	--accent:#{variable2};
+	--warn:#{variable3};
 
-	--consumed-by-js:$valiable1; // Error. You shall use #{ valiable } phrase.
+	--consumed-by-js:$variable1; // Error. You shall use #{ variable } phrase.
+}
+
+```
+## Parent selector
+
+"&" symbol can be replaced from parent.
+
+```SCSS
+.class{
+	&:hover{
+		font-size:10px;
+	}
+	[dir=rtl] & {
+		margin-left:0;
+		margin-right:10px;
+	}
+
+	:not(&){
+		opacity:0.5;
+	}
+
 }
 
 ```
 
+### Adding suffixes
+
+You can easily add suffix when you use "&" symbol.
+
+```SCSS
+.class{
+	padding:10px;
+	&__copy{
+		margin:10px;
+		width:10%;
+	}
+
+	&--open{
+		display:block;
+	}
+}
+
+```
+
+Link: https://sass-lang.com/documentation/style-rules/placeholder-selectors
+
+## Placeholder Selectors
+
+"%" symbol uses prefix.
+if you use "%", selector, parameter, and etc. are not included in CSS.
+
+```SCSS
+.alert:hover, %.class{
+	font-weight:bold;
+}
+// .class does not generate in CSS.
+
+%.class:hover{
+	font-size:10px;
+}
+// .class:hover does not generat in CSS.
+
+```
+
+```SCSS
+%toolbelt{
+	padding:10px;
+	
+	&:hover{
+		border:2px blue solid;
+	}
+}
+
+.action-buttons{
+	@extend %toolbelt;
+	color:blue;
+}
+
+```
+
+extend can use replacement.
+CSS is
+
+```css
+.action-buttons{
+	padding:10px;
+}
+
+.action-buttons:hover{
+	border:2px blue solid;
+}
+
+.action-buttons{
+	color:blue;
+}
+
+```
+
+Link: https://sass-lang.com/documentation/variables
 
 
+## variables
+
+### definition
+
+Top level definition SCSS file.
+```SCSS
+@use 'url-library.scss' with{
+	$black:#222, // you use "," in variable list.
+	$border-radius: 0.1 rem
+}
+```
+Child css "/library.scss" 
+```SCSS
+$black:#000 !default;
+$border-radius:0.5rem !default;
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
+// default is replaced from top level definition SCSS when it is defined variable.
+
+code{
+	border-radius: $border-radius;
+	box-shadow: $box-shadow;
+}
+
+```
+
+Generated css is
+
+```css
+code{
+	border-radius:0.1rem;
+	box-shadow:0 0.5rem 1rem rgba(34, 34, 34, 0.15);
+}
+```
+
+### Valrable scopes
+
+```SCSS
+$global-variable:global value;
+// Global variable is defined out of selector.
+
+.class{
+	$local-variable:local value;
+	font-size:$global-value;
+	color:$local-variable;
+}
+
+.class1{
+	font-size:$global-value;
+	// color:$local-valiable  ... this is fail. local variable cannot defined from selector.
+}
+
+.class2{
+	$gloval-variable:local value;
+	color:$gloval-variable; // css out put is local value. local variable is strogner than gloval variable. You can replace value when accident condition.
+	$local-variable:glovbal value !global; // Gloval variable is defined in local area when it uses !global.
+}
+
+.class3{
+	value: $local-valiable; // css output is global value.
+}
+
+```
+## At rule
+
+Link: https://sass-lang.com/documentation/at-rules/use
+
+### @use
+
+```SCSS
+// in foundation/_code.scss
+code{
+	padding:10px;
+	line-height:10px;
+}
+
+// in foundation/_list.scss
+ul, ol {
+	test-align:left;
+
+	& & {
+		padding:{
+			bottom:0px;
+			left:0px;
+		}
+	}
+}
+
+// in style.css
+@use 'foundation/code';
+@use 'foundation/lists';
+
+```
+### Loading memmbers
+
+```SCSS
 
 
-### 
-
-
-
-
+```
 

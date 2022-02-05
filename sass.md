@@ -389,6 +389,56 @@ ul, ol {
 ### Loading memmbers
 
 ```SCSS
+// src/_corners.scss
+$radius:3px;
+
+@mixin rounded{
+	border-radius:$radius;
+}
+
+// style.scss
+@use "src/corners";
+
+.button{
+	@include corners.rounded;
+	padding:5px + corners.$radius;
+}
+
+// same as following method
+// style.scss
+@use "src/corners" as c;
+
+.button{
+	@include c.rounded;
+	padding:5px + c.$radius;
+}
+
+```
+
+### @import
+
+```scss
+// in foundation/_code.scss
+code{
+	padding:10px;
+	line-height:10px;
+}
+
+// in foundation/_list.scss
+ul, ol {
+	test-align:left;
+
+	& & {
+		padding:{
+			bottom:0px;
+			left:0px;
+		}
+	}
+}
+
+// in style.css
+@import 'foundation/code';
+@import 'foundation/lists';
 
 
 ```

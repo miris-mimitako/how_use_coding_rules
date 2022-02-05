@@ -24,6 +24,8 @@ These are affected in blocks layaout and actual view.
 ### block (module)
 block uses prefix "bl_"
 
+Child name shall inherent from parent name.
+
 Block defines following paramter.
 * text arrangement
 * text fonts in own block
